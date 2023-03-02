@@ -38,6 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api/users/', include('users.api.urls')),
+    path('products/', include('products.api.urls')),
     # Browsable api sayfası için 👇🏻
     path('api-auth/', include('rest_framework.urls')),
     # swagger urls
