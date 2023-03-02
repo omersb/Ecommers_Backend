@@ -38,11 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #! 3rd parts
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
+    'drf_yasg',
+    #! my_apps
     'users',
-    'drf_yasg'
+    'products',
+
 
 ]
 
@@ -140,3 +144,6 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     'TOKEN_SERIALIZER': 'users.api.serializers.CustomTokenSerializer',
 }
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = "uploads"
