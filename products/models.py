@@ -27,6 +27,8 @@ class Products(models.Model):
         help_text="Size of products, example S-M-L-XL or 45-39", max_length=10, blank=True, null=True)
     amount = models.CharField(
         help_text="Size of products, example 500g - 1kg", max_length=10, blank=True, null=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -53,6 +55,7 @@ class Comments(models.Model):
         User, on_delete=models.CASCADE, related_name="comments_user")
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'this is comments on {self.product.name}'
