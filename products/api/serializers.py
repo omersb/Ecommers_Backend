@@ -16,7 +16,7 @@ class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
         fields = ("id", "product", "user", "user_id", "created_date")
-        read_only_fields = ("created_date")
+        read_only_fields = ("created_date",)
 
 
 class CommentsSerializer(serializers.ModelSerializer):
@@ -27,7 +27,8 @@ class CommentsSerializer(serializers.ModelSerializer):
         model = Comments
         fields = ("id", "product", "user", "user_id",
                   "comment", "created_date", "updated_date")
-        read_only_fields = ("created_date", "updated_date")
+        read_only_fields = ("created_date", "updated_date",
+                            "product", "user", "user_id")
 
 
 class ProductsSerializer(serializers.ModelSerializer):
@@ -35,16 +36,17 @@ class ProductsSerializer(serializers.ModelSerializer):
     category_id = serializers.IntegerField()
     like = serializers.SerializerMethodField()
     comment = serializers.SerializerMethodField()
+    show_comments = CommentsSerializer(many=True, read_only=True)
 
     class Meta:
         model = Products
         fields = ("id", "category", "category_id",
-                  "name", "description", "price", "image", "stock", "size", "amount", "like", "comment", "created_date", "updated_date")
+                  "name", "description", "price", "image", "stock", "size", "amount", "like", "comment", "show_comments", "created_date", "updated_date")
         read_only_fields = ("created_date", "updated_date",
                             "category", "category_id")
 
-        def get_like(self, obj):
-            return Like.objects.filter(product=obj.id).count()
+    def get_like(self, obj):
+        return Like.objects.filter(product=obj.id).count()
 
-        def get_comment(self, obj):
-            return Comments.objects.filter(product=obj.id).count()
+    def get_comment(self, obj):
+        return Comments.objects.filter(product=obj.id).count()
