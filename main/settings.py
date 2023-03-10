@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     #! my_apps
     'users',
     'products',
-
+    'order',
 
 ]
 
